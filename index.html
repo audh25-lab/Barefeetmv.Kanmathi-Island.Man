@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<!-- =========================================================
+     APP IDENTITY — ALIGNED (v2.0)
+========================================================= -->
+<title>Barefeetmv.Kanmathi-Island.Man v2.0</title>
+<meta name="application-name" content="Barefeetmv.Kanmathi-Island.Man">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+
+<!-- =========================================================
+     PWA MANIFEST — ALIGNED NAME + VERSION 2
+========================================================= -->
+<link rel="manifest" href="data:application/manifest+json,{
+  &quot;name&quot;:&quot;Barefeetmv.Kanmathi-Island.Man&quot;,
+  &quot;short_name&quot;:&quot;Kanmathi&quot;,
+  &quot;description&quot;:&quot;A minimalist puzzle game inspired by Threes, set in the Barefeetmv Kanmathi Island universe.&quot;,
+  &quot;start_url&quot;:&quot;.&quot;,
+  &quot;display&quot;:&quot;standalone&quot;,
+  &quot;background_color&quot;:&quot;#0b1220&quot;,
+  &quot;theme_color&quot;:&quot;#38bdf8&quot;,
+  &quot;orientation&quot;:&quot;portrait&quot;
+}">
+
+<style>
+/* =========================================================
+   VERSION
+========================================================= */
+:root::before{
+  content:"v2.0";
+  position:fixed;
+  bottom:6px;right:10px;
+  font-size:10px;
+  opacity:.4;
+}
+
+/* =========================================================
+   THEME + ACCESSIBILITY
+========================================================= */
+:root{
+  --bg:#0b1220;--panel:#111827;--cell:#1f2937;
+  --text:#fff;--accent:#38bdf8;
+  --c1:#38bdf8;--c2:#facc15;--c3:#22c55e;
+}
+.light{
+  --bg:#e5e7eb;--panel:#f9fafb;--cell:#d1d5db;
+  --text:#111827;--accent:#0284c7;
+}
+.cb{
+  --c1:#2563eb;--c2:#d97706;--c3:#7c3aed;
+}
+
+/* =========================================================
+   BASE LAYOUT
+========================================================= */
+html,body{
+  margin:0;height:100%;
+  background:var(--bg);color:var(--text);
+  font-family:system-ui,sans-serif;
+  display:flex;justify-content:center;align-items:center;
+}
+#game{
+  background:var(--panel);
+  padding:14px;border-radius:16px;
+  width:320px;
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+  transform:scale(.9);opacity:0;
+  animation:boot .45s ease forwards;
+}
+@keyframes boot{
+  to{transform:scale(1);opacity:1}
+}
+#hud{
+  display:flex;justify-content:space-between;
+  font-weight:800;margin-bottom:8px;
+}
+#score.bump{animation:bump .18s}
+@keyframes bump{50%{transform:scale(1.25)}}
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px
+}
+.cell{
+  height:64px;border-radius:10px;
+  background:var(--cell);position:relative
+}
+.tile{
+  position:absolute;inset:0;
+  display:flex;justify-content:center;align-items:center;
+  border-radius:10px;font-weight:900;font-size:22px;
+  animation:pop .14s ease-out
+}
+@keyframes pop{from{transform:scale(.85)}}
+
+/* =========================================================
+   TILE COLORS
+========================================================= */
+[data-v="1"]{background:var(--c1)}
+[data-v="2"]{background:var(--c2);color:#111}
+[data-v="3"]{background:var(--c3)}
+[data-v="6"]{background:#4ade80}
+[data-v="12"]{background:#86efac;color:#064e3b}
+[data-v="24"]{background:#bbf7d0;color:#064e3b}
+[data-v="48"]{background:#f472b6}
+[data-v="96"]{background:#fb7185}
+[data-v="192"]{background:#f97316}
+
+/* =========================================================
+   UI
+========================================================= */
+.controls{display:flex;gap:6px;margin-top:8px}
+button{
+  flex:1;padding:10px;border:none;
+  border-radius:10px;font-weight:800;
+  background:var(--accent);color:#062a36;
+}
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;
+}
+.panel{
+  background:var(--panel);
+  padding:20px;border-radius:14px;
+  width:260px;text-align:center;
+}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+  <div id="hud">
+    <div>Score <span id="score">0</span></div>
+    <div>Best <span id="best">0</span></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="controls">
+    <button onclick="undo()">Undo</button>
+    <button onclick="toggleTheme()">Theme</button>
+    <button onclick="toggleCB()">CB</button>
+    <button onclick="reset()">Restart</button>
+  </div>
+</div>
+
+<div id="end" class="overlay hidden">
+  <div class="panel">
+    <h2>Game Over</h2>
+    <h1 id="endScore">0</h1>
+    <button onclick="reset();hideEnd()">Play Again</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   BAREFEETMV.KANMATHI-ISLAND.MAN — v2.0
+========================================================= */
+const SIZE=4;
+let grid,score=0,history=[],over=false;
+
+const gridEl=document.getElementById("grid");
+const scoreEl=document.getElementById("score");
+const bestEl=document.getElementById("best");
+let best=+localStorage.getItem("bf_v2_best")||0;
+bestEl.textContent=best;
+
+/* AUDIO + HAPTIC */
+const ctx=new (window.AudioContext||window.webkitAudioContext)();
+const beep=f=>{const o=ctx.createOscillator(),g=ctx.createGain();
+o.frequency.value=f;g.gain.value=.05;
+o.connect(g).connect(ctx.destination);
+o.start();o.stop(ctx.currentTime+.06)};
+const buzz=ms=>navigator.vibrate&&navigator.vibrate(ms);
+
+/* RESET */
+function reset(){
+  score=0;over=false;
+  grid=[...Array(SIZE)].map(()=>Array(SIZE).fill(0));
+  history=[];
+  spawn();spawn();render();
+}
+reset();
+
+/* SPAWN */
+function spawn(){
+  const e=[];
+  grid.forEach((r,y)=>r.forEach((v,x)=>!v&&e.push({x,y})));
+  if(!e.length)return;
+  const {x,y}=e[Math.random()*e.length|0];
+  grid[y][x]=Math.random()<.5?1:2;
+}
+
+/* MOVE */
+function move(dx,dy){
+  if(over)return;
+  history.push({g:grid.map(r=>r.slice()),s:score});
+  let moved=false;
+  const o=[0,1,2,3]; if(dx>0||dy>0)o.reverse();
+  for(const y of o)for(const x of o){
+    let v=grid[y][x]; if(!v)continue;
+    let nx=x,ny=y;
+    while(true){
+      const tx=nx+dx,ty=ny+dy;
+      if(tx<0||ty<0||tx>=SIZE||ty>=SIZE)break;
+      const t=grid[ty][tx];
+      if(!t){
+        grid[ty][tx]=v;grid[ny][nx]=0;
+        nx=tx;ny=ty;moved=true;
+      }else if((v===1&&t===2)||(v===2&&t===1)){
+        grid[ty][tx]=3;grid[ny][nx]=0;
+        score+=3;beep(600);buzz(15);moved=true;break;
+      }else if(v>=3&&v===t){
+        grid[ty][tx]=v*2;grid[ny][nx]=0;
+        score+=v*2;beep(800);buzz(20);moved=true;break;
+      }else break;
+    }
+  }
+  if(moved){spawn();pulse();render();checkOver()}
+  else history.pop();
+}
+
+/* UNDO */
+const undo=()=>{const p=history.pop();if(p){grid=p.g;score=p.s;render()}};
+
+/* INPUT */
+onkeydown=e=>{
+  if(e.key==="ArrowLeft")move(-1,0);
+  if(e.key==="ArrowRight")move(1,0);
+  if(e.key==="ArrowUp")move(0,-1);
+  if(e.key==="ArrowDown")move(0,1);
+};
+let sx,sy;
+ontouchstart=e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY};
+ontouchend=e=>{
+  const dx=e.changedTouches[0].clientX-sx;
+  const dy=e.changedTouches[0].clientY-sy;
+  Math.abs(dx)>Math.abs(dy)
+    ? dx>20&&move(1,0)||dx<-20&&move(-1,0)
+    : dy>20&&move(0,1)||dy<-20&&move(0,-1);
+};
+
+/* GAME OVER */
+function checkOver(){
+  for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++){
+    if(!grid[y][x])return;
+    for(const[dX,dY]of[[1,0],[0,1],[-1,0],[0,-1]]){
+      const nx=x+dX,ny=y+dY;
+      if(nx>=0&&ny>=0&&nx<SIZE&&ny<SIZE){
+        const a=grid[y][x],b=grid[ny][nx];
+        if(a===b||a+b===3)return;
+      }
+    }
+  }
+  over=true;
+  document.getElementById("endScore").textContent=score;
+  document.getElementById("end").classList.remove("hidden");
+}
+const hideEnd=()=>document.getElementById("end").classList.add("hidden");
+
+/* ACCESSIBILITY */
+const toggleTheme=()=>document.body.classList.toggle("light");
+function toggleCB(){
+  document.body.classList.toggle("cb");
+  localStorage.setItem("bf_v2_cb",document.body.classList.contains("cb"));
+}
+if(localStorage.getItem("bf_v2_cb")==="true")document.body.classList.add("cb");
+
+/* FX */
+function pulse(){
+  scoreEl.classList.add("bump");
+  setTimeout(()=>scoreEl.classList.remove("bump"),180);
+}
+
+/* RENDER */
+function render(){
+  gridEl.innerHTML="";
+  scoreEl.textContent=score;
+  if(score>best){
+    best=score;
+    localStorage.setItem("bf_v2_best",best);
+    bestEl.textContent=best;
+  }
+  grid.forEach(r=>r.forEach(v=>{
+    const c=document.createElement("div");c.className="cell";
+    if(v){
+      const t=document.createElement("div");
+      t.className="tile";t.dataset.v=v;t.textContent=v;
+      c.appendChild(t);
+    }
+    gridEl.appendChild(c);
+  }));
+}
+
+/* PWA SERVICE WORKER */
+if("serviceWorker"in navigator){
+  const sw=`
+    self.addEventListener('install',e=>{
+      e.waitUntil(caches.open('bf-v2').then(c=>c.addAll(['./'])));
+      self.skipWaiting();
+    });
+    self.addEventListener('fetch',e=>{
+      e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
+    });
+  `;
+  navigator.serviceWorker.register(
+    URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))
+  );
+}
+</script>
+</body>
+</html>
