@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Barefeetmv.Kanmathi — Island.Man</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1a1a">
+<style>
+html,body{margin:0;padding:0;background:#000;overflow:hidden;font-family:system-ui}
+canvas{display:block}
+.ui{position:fixed;inset:0;pointer-events:none}
+.btn{pointer-events:auto;padding:14px 22px;border-radius:14px;background:#0fd;color:#000;font-weight:700}
+.hud{position:fixed;top:10px;left:10px;color:#fff}
+.menu{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(#012,#000)}
+.hide{display:none}
+.touch{position:fixed;bottom:18px;width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.12)}
+#left{left:16px} #right{right:16px}
+</style>
+</head>
+<body>
+
+<div id="menu" class="menu">
+  <h1 style="color:#0fd">Barefeetmv.Kanmathi</h1>
+  <button class="btn" onclick="Game.start()">PLAY</button>
+</div>
+
+<div id="hud" class="hud hide">
+  <div>Score: <span id="score">0</span></div>
+  <div>Coins: <span id="coins">0</span></div>
+  <div>Lives: <span id="lives">3</span></div>
+</div>
+
+<div id="left" class="touch"></div>
+<div id="right" class="touch"></div>
+
+<canvas id="c"></canvas>
+
+<script>
+/* =========================================================
+   BAREFEETMV.KANMATHI — ISLAND.MAN
+   Offline Endless Runner • Peak Single-File Engine
+========================================================= */
+
+const canvas=document.getElementById("c"),ctx=canvas.getContext("2d");
+let W,H,DPR=Math.min(devicePixelRatio,2);
+function resize(){W=canvas.width=innerWidth*DPR;H=canvas.height=innerHeight*DPR}
+addEventListener("resize",resize);resize();
+
+/* =======================
+   UTIL
+======================= */
+const R=(a,b)=>Math.random()*(b-a)+a;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const now=()=>performance.now();
+
+/* =======================
+   INPUT
+======================= */
+let inputX=0;
+left.ontouchstart=()=>inputX=-1;
+right.ontouchstart=()=>inputX=1;
+left.ontouchend=right.ontouchend=()=>inputX=0;
+addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft")inputX=-1;
+  if(e.key==="ArrowRight")inputX=1;
+});
+addEventListener("keyup",()=>inputX=0);
+
+/* =======================
+   GAME STATE
+======================= */
+const Game={
+  running:false,
+  speed:8,
+  score:0,
+  coins:0,
+  lives:3,
+  t:0,
+  entities:[],
+  player:{x:0,y:0,vx:0,vy:0,r:18,inv:0},
+  start(){
+    menu.classList.add("hide");
+    hud.classList.remove("hide");
+    this.reset(); this.running=true; loop();
+  },
+  reset(){
+    this.speed=8;this.score=0;this.coins=0;this.lives=3;
+    this.entities.length=0;
+    this.player.x=W/2;this.player.y=H*0.7;
+  }
+};
+
+/* =======================
+   ENTITIES
+======================= */
+function spawn(){
+  const type=Math.random()<.7?"coin":"ob";
+  Game.entities.push({
+    t:type,
+    x:R(40,W-40),
+    y:-40,
+    r:type==="coin"?10:22
+  });
+}
+
+/* =======================
+   UPDATE
+======================= */
+function update(dt){
+  Game.t+=dt;
+  if(Math.random()<0.03)spawn();
+
+  Game.player.vx+=(inputX*0.6-Game.player.vx)*0.2;
+  Game.player.x+=Game.player.vx*dt*0.06;
+  Game.player.x=clamp(Game.player.x,20,W-20);
+  if(Game.player.inv>0)Game.player.inv-=dt;
+
+  Game.entities.forEach(e=>e.y+=Game.speed);
+  Game.entities=Game.entities.filter(e=>e.y<H+50);
+
+  Game.entities.forEach(e=>{
+    const dx=e.x-Game.player.x,dy=e.y-Game.player.y;
+    if(Math.hypot(dx,dy)<e.r+Game.player.r){
+      if(e.t==="coin"){
+        Game.coins++; Game.score+=10; e.y=H+999;
+      }else if(Game.player.inv<=0){
+        Game.lives--; Game.player.inv=800; e.y=H+999;
+        if(Game.lives<=0)gameOver();
+      }
+    }
+  });
+
+  Game.score+=dt*0.02;
+  Game.speed+=dt*0.0005;
+
+  score.textContent=Game.score|0;
+  coins.textContent=Game.coins;
+  lives.textContent=Game.lives;
+}
+
+/* =======================
+   RENDER
+======================= */
+function render(){
+  ctx.clearRect(0,0,W,H);
+
+  // Parallax ocean
+  for(let i=0;i<40;i++){
+    ctx.fillStyle="rgba(0,150,200,.15)";
+    ctx.fillRect((i*80+Game.t*0.05)%W,0,2,H);
+  }
+
+  // Player
+  ctx.fillStyle=Game.player.inv>0?"#ff0":"#0f0";
+  ctx.beginPath();
+  ctx.arc(Game.player.x,Game.player.y,Game.player.r,0,Math.PI*2);
+  ctx.fill();
+
+  // Entities
+  Game.entities.forEach(e=>{
+    ctx.fillStyle=e.t==="coin"?"#fd0":"#f33";
+    ctx.beginPath();
+    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
+    ctx.fill();
+  });
+}
+
+/* =======================
+   LOOP
+======================= */
+let last=now();
+function loop(){
+  if(!Game.running)return;
+  const n=now(),dt=n-last;last=n;
+  update(dt); render();
+  requestAnimationFrame(loop);
+}
+
+function gameOver(){
+  Game.running=false;
+  menu.classList.remove("hide");
+}
+
+/* =======================
+   PWA
+======================= */
+if("serviceWorker"in navigator){
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+</body>
+</html>
