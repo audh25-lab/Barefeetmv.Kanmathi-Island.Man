@@ -2,322 +2,504 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- =========================================================
-     APP IDENTITY — v3.0 FINAL
-========================================================= -->
-<title>Barefeetmv.Kanmathi-Island.Man v3.0</title>
+<title>Barefeetmv.Kanmathi-Island.Man v6.0 Maldivian Eternal Paradise</title>
 <meta name="application-name" content="Barefeetmv.Kanmathi-Island.Man">
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1,
-               maximum-scale=1,
-               user-scalable=no,
-               viewport-fit=cover">
-<meta name="theme-color" content="#38bdf8">
-<meta name="screen-orientation" content="portrait">
-<meta name="orientation" content="portrait">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0ea5e9">
+<meta name="color-scheme" content="dark light">
+<meta name="app-version" content="6.0.0">
+<meta name="build-hash" content="KANMATHI-ISLAND-MAN-V6-ETERNAL-PARADISE">
 
-<!-- =========================================================
-     PWA MANIFEST
-========================================================= -->
 <link rel="manifest" href="data:application/manifest+json,{
   &quot;name&quot;:&quot;Barefeetmv.Kanmathi-Island.Man&quot;,
   &quot;short_name&quot;:&quot;Kanmathi&quot;,
-  &quot;description&quot;:&quot;A minimalist puzzle game inspired by Threes.&quot;,
   &quot;start_url&quot;:&quot;.&quot;,
   &quot;display&quot;:&quot;standalone&quot;,
-  &quot;background_color&quot;:&quot;#0b1220&quot;,
-  &quot;theme_color&quot;:&quot;#38bdf8&quot;,
-  &quot;orientation&quot;:&quot;portrait&quot;
+  &quot;background_color&quot;:&quot;#020917&quot;,
+  &quot;theme_color&quot;:&quot;#0ea5e9&quot;,
+  &quot;orientation&quot;:&quot;portrait-primary&quot;,
+  &quot;icons&quot;:[
+    {&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23020617'/><path d='M96,20 Q120,50 140,70 Q160,90 160,120 Q160,150 130,170 Q100,190 96,190 Q92,190 70,170 Q40,150 40,120 Q40,90 60,70 Q80,50 96,20 Z' fill='%230ea5e9' opacity='.8'/><circle cx='96' cy='80' r='30' fill='%23fbbf24'/><g fill='%23ec4899'><path d='M60,110 Q65,105 70,110'/><path d='M122,110 Q127,105 132,110'/></g><path d='M50,140 Q96,160 142,140' stroke='%23ec4899' stroke-width='8' fill='none'/></svg>&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;},
+    {&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23020617'/><path d='M256,50 Q320,120 380,170 Q440,220 440,300 Q440,380 380,440 Q320,500 256,500 Q192,500 130,440 Q70,380 70,300 Q70,220 130,170 Q190,120 256,50 Z' fill='%230ea5e9' opacity='.9'/><circle cx='256' cy='180' r='80' fill='%23fbbf24'/><g fill='%23ec4899'><path d='M170,260 Q185,245 200,260'/><path d='M312,260 Q327,245 342,260'/></g><path d='M130,360 Q256,420 382,360' stroke='%23ec4899' stroke-width='20' fill='none'/></g></svg>&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}
+  ]
 }">
 
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-<text y='.9em' font-size='90'>🏝️</text>
-</svg>">
-
 <style>
-/* =========================================================
-   HARD LOCK — NO SCROLL / NO BOUNCE / NO ZOOM
-========================================================= */
-*{box-sizing:border-box}
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  position:fixed;
-  overflow:hidden;
-  overscroll-behavior:none;
-  touch-action:none;
-  -webkit-user-select:none;
-  user-select:none;
-  background:#0b1220;
-  color:#fff;
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
-}
+/* =============== SUPER OPTIMIZED FOUNDATION =============== */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none;user-select:none;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;transform:none!important}}
 
-/* =========================================================
-   VERSION STAMP
-========================================================= */
-:root::after{
-  content:"v3.0 FINAL";
-  position:fixed;
-  bottom:6px;
-  right:10px;
-  font-size:10px;
-  opacity:.35;
-  pointer-events:none;
-}
+/* Version watermark - elegant */
+:root::after{content:"v6.0 Eternal Paradise";position:fixed;bottom:10px;right:14px;font-size:12px;opacity:.5;z-index:100;color:#22d3ee;letter-spacing:1px;font-weight:600}
 
-/* =========================================================
-   THEMES
-========================================================= */
+/* =============== MALDIVIAN ETERNAL THEME - MASTERPIECE =============== */
 :root{
-  --bg:#0b1220;
-  --panel:#111827;
-  --cell:#1f2937;
-  --text:#fff;
-  --accent:#38bdf8;
-  --c1:#38bdf8;
-  --c2:#facc15;
-  --c3:#22c55e;
+  --bg:#020917;
+  --panel:linear-gradient(145deg,#0c4a6e,#0369a1,#0ea5e9,#22d3ee);
+  --cell:rgba(12,74,110,.7);
+  --text:#e0f2fe;
+  --accent:#0ea5e9;
+  --glow:#22d3ee;
+  --sun:#fbbf24;
+  --coral:#ec4899;
+  --wave:#67e8f988;
 }
+
+/* Light mode - crystal clear lagoon */
 .light{
-  --bg:#e5e7eb;
-  --panel:#f9fafb;
-  --cell:#d1d5db;
-  --text:#111827;
+  --bg:#f0f9ff;--panel:#e0f2fe;--cell:rgba(186,230,253,.8);--text:#0c4a6e;--accent:#0369a1;--glow:#0ea5e9;--sun:#f59e0b;--coral:#f43f5e;
 }
+
+/* Color blind mode - high contrast */
 .cb{
-  --c1:#2563eb;
-  --c2:#d97706;
-  --c3:#7c3aed;
+  --accent:#06b6d4;--glow:#22d3ee;--sun:#facc15;--coral:#ec4899;
 }
 
-/* =========================================================
-   LAYOUT
-========================================================= */
+/* Epic animated Maldives background - living ocean */
 body{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:
-    env(safe-area-inset-top)
-    env(safe-area-inset-right)
-    env(safe-area-inset-bottom)
-    env(safe-area-inset-left);
+  background:
+    radial-gradient(circle at 20% 80%,rgba(34,211,238,.3),transparent 50%),
+    radial-gradient(circle at 80% 20%,rgba(251,191,36,.2),transparent 50%),
+    var(--bg) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200"><defs><linearGradient id="ocean" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="%230269a1"/><stop offset="50%" stop-color="%230ea5e9"/><stop offset="100%" stop-color="%2367e8f9"/></linearGradient><linearGradient id="lagoon" x1="0%" y1="0%" x2="100%"><stop offset="0%" stop-color="%23fde68a"/><stop offset="100%" stop-color="%23fecaca"/></linearGradient></defs><rect width="800" height="800" fill="url(%23ocean)"/><path d="M0,800 Q200,750 400,800 T800,800 L800,1200 L0,1200 Z" fill="url(%23lagoon)"/><circle cx="600" cy="200" r="80" fill="%23fbbf24"/><circle cx="600" cy="200" r="90" fill="%23fbbf2418"/><g fill="%230366a1" opacity=".8"><ellipse cx="150" cy="700" rx="80" ry="20"/><ellipse cx="400" cy="720" rx="100" ry="25"/><ellipse cx="650" cy="710" rx="90" ry="22"/></g><animateTransform attributeName="transform" type="translate" values="0,0;10,10;0,0" dur="20s" repeatCount="indefinite"/></svg>') center/cover no-repeat fixed;
+  display:flex;align-items:center;justify-content:center;
+  animation:oceanBreathe 40s infinite ease-in-out;
 }
+@keyframes oceanBreathe{0%,100%{background-size:100% 100%}50%{background-size:105% 105%}}
+
+/* Game container - overwater bungalow luxury */
 #game{
+  width:min(98vw,420px);
+  padding:24px;
   background:var(--panel);
-  width:320px;
-  padding:14px;
-  border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,.45);
-  animation:boot .45s ease forwards;
+  border-radius:32px;
+  box-shadow:
+    0 50px 120px rgba(0,0,0,.8),
+    inset 0 0 60px rgba(14,165,233,.4),
+    0 0 40px rgba(34,211,238,.3);
+  border:5px solid rgba(14,165,233,.5);
+  position:relative;
+  overflow:hidden;
+  backdrop-filter:blur(8px);
 }
-@keyframes boot{from{opacity:0;transform:scale(.92)}}
+#game::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 40% 30%,rgba(34,211,238,.4),transparent 60%);
+  pointer-events:none;
+  animation:pulseGlow 15s infinite ease-in-out;
+}
+@keyframes pulseGlow{0%,100%{opacity:.3}50%{opacity:.6}}
 
+/* HUD - crystal elegance */
 #hud{
-  display:flex;
-  justify-content:space-between;
-  font-weight:800;
-  margin-bottom:8px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-weight:900;color:var(--text);font-size:1.15em;
+  text-shadow:0 3px 8px rgba(0,0,0,.6);
+  padding:0 8px;
 }
-#score.bump{animation:bump .18s}
-@keyframes bump{50%{transform:scale(1.25)}}
-
+#hud span{
+  font-size:1.8em;color:var(--sun);text-shadow:0 0 20px var(--sun)40;
+  animation:sunGlow 4s infinite ease-in-out;
+}
+@keyframes sunGlow{0%,100%{text-shadow:0 0 20px #fbbf2440}50%{text-shadow:0 0 30px #fbbf2480}}
+     /* Grid - underwater coral reef structure */
 .grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-.cell{
-  height:64px;
-  border-radius:10px;
-  background:var(--cell);
+  gap:14px;
+  margin:24px 0;
+  padding:20px;
+  background:rgba(0,0,0,.35);
+  border-radius:24px;
+  box-shadow:
+    inset 0 10px 30px rgba(0,0,0,.6),
+    0 0 30px rgba(34,211,238,.2);
   position:relative;
+  overflow:hidden;
 }
-.tile{
+.grid::before{
+  content:"";
   position:absolute;
   inset:0;
+  background:radial-gradient(circle at center,rgba(103,232,249,.15),transparent 70%);
+  pointer-events:none;
+  animation:reefGlow 18s infinite ease-in-out;
+}
+@keyframes reefGlow{0%,100%{opacity:.4}50%{opacity:.7}}
+
+/* Cells - crystal clear water pockets */
+.cell{
+  aspect-ratio:1;
+  background:var(--cell);
+  border-radius:20px;
+  position:relative;
+  box-shadow:
+    inset 0 8px 20px rgba(0,0,0,.5),
+    0 6px 16px rgba(0,0,0,.4),
+    0 0 20px rgba(34,211,238,.15);
+  overflow:hidden;
+  transition:transform .15s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.cell::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(34,211,238,.25),rgba(251,191,36,.1),transparent);
+  border-radius:20px;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+.cell:has(.tile)::before{
+  opacity:1;
+}
+.cell:active{
+  transform:scale(.95);
+}
+
+/* Tiles - living coral masterpieces with god-tier animations */
+.tile{
+  position:absolute;
+  inset:8px;
+  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:10px;
   font-weight:900;
-  font-size:22px;
-  animation:pop .14s ease-out;
+  font-size:36px;
+  color:#020617;
+  text-shadow:
+    0 3px 6px rgba(255,255,255,.6),
+    0 0 15px rgba(255,255,255,.4);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.6),
+    inset 0 0 30px rgba(255,255,255,.3),
+    0 0 30px var(--glow)40;
+  animation:
+    coralPop .22s cubic-bezier(0.175,0.885,0.32,1.8),
+    gentleFloat 6s infinite ease-in-out,
+    subtleGlow 4s infinite ease-in-out;
+  transform-origin:center;
+  backface-visibility:hidden;
+  will-change:transform;
 }
-@keyframes pop{from{transform:scale(.85)}}
+@keyframes coralPop{
+  0%{transform:scale(0) rotate(-540deg) translateY(100px);opacity:0}
+  70%{transform:scale(1.15) rotate(-20deg)}
+  100%{transform:scale(1) rotate(0);opacity:1}
+}
+@keyframes gentleFloat{
+  0%,100%{transform:translateY(0) translateX(0)}
+  50%{transform:translateY(-12px) translateX(4px)}
+}
+@keyframes subtleGlow{
+  0%,100%{box-shadow:0 16px 40px rgba(0,0,0,.6),inset 0 0 30px rgba(255,255,255,.3),0 0 30px var(--glow)40}
+  50%{box-shadow:0 20px 50px rgba(0,0,0,.7),inset 0 0 40px rgba(255,255,255,.4),0 0 50px var(--glow)80}
+}
 
-/* =========================================================
-   TILE COLORS
-========================================================= */
-[data-v="1"]{background:var(--c1)}
-[data-v="2"]{background:var(--c2);color:#111}
-[data-v="3"]{background:var(--c3)}
-[data-v="6"]{background:#4ade80}
-[data-v="12"]{background:#86efac;color:#064e3b}
-[data-v="24"]{background:#bbf7d0;color:#064e3b}
-[data-v="48"]{background:#f472b6}
-[data-v="96"]{background:#fb7185}
-[data-v="192"]{background:#f97316}
+/* Eternal Maldives Coral Palette - each value a unique living species */
+[data-v="1"]{background:linear-gradient(135deg,#a5f3fc,#67e8f9);box-shadow:0 0 30px #67e8f980}
+[data-v="2"]{background:linear-gradient(135deg,#99f6e4,#5eead4);box-shadow:0 0 30px #5eead480}
+[data-v="3"]{background:linear-gradient(135deg,#86efac,#22d3ee);box-shadow:0 0 30px #22d3ee80;color:#fff}
+[data-v="6"]{background:linear-gradient(135deg,#22d3ee,#0ea5e9);box-shadow:0 0 35px #0ea5e980;color:#fff}
+[data-v="12"]{background:linear-gradient(135deg,#0ea5e9,#3b82f6);box-shadow:0 0 40px #3b82f680;color:#fff}
+[data-v="24"]{background:linear-gradient(135deg,#3b82f6,#6366f1);box-shadow:0 0 45px #6366f180;color:#fff}
+[data-v="48"]{background:linear-gradient(135deg,#6366f1,#8b5cf6);box-shadow:0 0 50px #8b5cf680;color:#fff}
+[data-v="96"]{background:linear-gradient(135deg,#8b5cf6,#c084fc);box-shadow:0 0 55px #c084fc80;color:#fff}
+[data-v="192"]{background:linear-gradient(135deg,#c084fc,#ec4899);box-shadow:0 0 60px #ec489980;color:#fff}
+[data-v="384"]{background:linear-gradient(135deg,#ec4899,#f43f5e);box-shadow:0 0 70px #f43f5e90;color:#fff}
+[data-v="768"]{background:linear-gradient(135deg,#f43f5e,#fb923c);box-shadow:0 0 80px #fb923c90;color:#fff}
+[data-v="1536"]{background:linear-gradient(135deg,#fb923c,#f97316);box-shadow:0 0 90px #f9731690;color:#fff}
+[data-v="3072"]{background:linear-gradient(135deg,#f97316,#ef4444);box-shadow:0 0 100px #ef444490;color:#fff}
+[data-v="6144"]{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 0 120px #dc262690;color:#fff}
+[data-v="12288"]{background:linear-gradient(135deg,#dc2626,#991b1b);box-shadow:0 0 140px #991b1b99;color:#fff}
 
-/* =========================================================
-   CONTROLS
-========================================================= */
+/* High-value tiles - legendary glow */
+[data-v="1536"],
+[data-v="3072"],
+[data-v="6144"],
+[data-v="12288"]{
+  animation:coralPop .22s cubic-bezier(0.175,0.885,0.32,1.8),gentleFloat 5s infinite ease-in-out,legendaryPulse 3s infinite ease-in-out;
+  font-size:34px;
+  font-weight:900;
+}
+@keyframes legendaryPulse{
+  0%,100%{filter:brightness(1) saturate(1)}
+  50%{filter:brightness(1.3) saturate(1.5)}
+}
+     /* Controls - luxury resort buttons */
 .controls{
-  display:flex;
-  gap:6px;
-  margin-top:8px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  padding:0 8px;
 }
 button{
-  flex:1;
-  padding:10px;
+  padding:16px 8px;
   border:none;
-  border-radius:10px;
-  font-weight:800;
-  background:var(--accent);
-  color:#062a36;
+  border-radius:18px;
+  font-weight:900;
+  font-size:1em;
+  background:linear-gradient(135deg,var(--accent),#22d3ee);
+  color:#082f49;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.5),
+    0 0 20px rgba(14,165,233,.4);
+  transition:all .18s cubic-bezier(0.175,0.885,0.32,1.275);
+  position:relative;
+  overflow:hidden;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+button::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.3),transparent 70%);
+  opacity:0;
+  transition:opacity .3s;
+}
+button:hover::before,
+button:active::before{
+  opacity:1;
+}
+button:active{
+  transform:scale(.92) translateY(4px);
+  box-shadow:0 6px 15px rgba(0,0,0,.6);
 }
 
-/* =========================================================
-   OVERLAYS
-========================================================= */
+/* Specific button enhancements */
+#undoBtn{ background:linear-gradient(135deg,#8b5cf6,#c084fc); }
+#themeBtn{ background:linear-gradient(135deg,#fbbf24,#f59e0b); color:#1e293b; }
+#cbBtn{ background:linear-gradient(135deg,#ec4899,#f43f5e); }
+#restartBtn{ background:linear-gradient(135deg,#22d3ee,#0ea5e9); }
+
+/* Overlays - cinematic Maldives sunset experience */
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
+  z-index:999;
+  background:rgba(2,9,23,.97);
+  backdrop-filter:blur(16px);
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:999;
+  animation:fadeInOverlay .6s ease-out;
 }
+@keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+
+/* Luxury resort panels */
 .panel{
   background:var(--panel);
-  padding:22px;
-  border-radius:16px;
+  padding:48px 32px;
+  border-radius:40px;
+  width:90%;
+  max-width:360px;
   text-align:center;
-  width:260px;
+  box-shadow:
+    0 60px 140px rgba(0,0,0,.9),
+    0 0 80px rgba(34,211,238,.5),
+    inset 0 0 60px rgba(255,255,255,.1);
+  border:6px solid rgba(14,165,233,.6);
+  position:relative;
+  overflow:hidden;
+  animation:panelRise .7s cubic-bezier(0.175,0.885,0.32,1.275);
 }
+@keyframes panelRise{
+  0%{transform:translateY(100px) scale(.8);opacity:0}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top center,rgba(251,191,36,.3),transparent 60%);
+  pointer-events:none;
+}
+
+/* Panel typography - tropical elegance */
+.panel h3{
+  font-size:2.2em;
+  margin-bottom:16px;
+  background:linear-gradient(90deg,#22d3ee,#ec4899,#fbbf24,#f59e0b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(251,191,36,.4);
+}
+.panel h2{
+  font-size:2.8em;
+  margin:20px 0;
+  background:linear-gradient(90deg,#ec4899,#f43f5e,#fb923c);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.panel h1{
+  font-size:4em;
+  margin:20px 0;
+  color:var(--sun);
+  text-shadow:0 0 40px var(--sun)80;
+  animation:sunGlow 3s infinite ease-in-out;
+}
+.panel p{
+  font-size:1.2em;
+  line-height:1.6;
+  color:var(--text);
+  opacity:.9;
+  margin:20px 0;
+}
+
+/* Panel buttons - call to adventure */
+.panel button{
+  margin-top:32px;
+  padding:18px 40px;
+  font-size:1.3em;
+  background:linear-gradient(135deg,#22d3ee,#0ea5e9,#0369a1);
+  border-radius:30px;
+  min-width:220px;
+}
+.panel button:active{
+  transform:scale(.95);
+}
+
 .hidden{display:none}
 </style>
 </head>
+     <body>
 
-<body>
-
-<div id="game">
+<div id="game" role="application" aria-label="Kanmathi Island Eternal Paradise">
   <div id="hud">
     <div>Score <span id="score">0</span></div>
     <div>Best <span id="best">0</span></div>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid" aria-live="polite"></div>
   <div class="controls">
-    <button id="undoBtn">Undo</button>
-    <button id="themeBtn">Theme</button>
-    <button id="cbBtn">CB</button>
-    <button id="restartBtn">Restart</button>
+    <button id="undoBtn">↺ Undo</button>
+    <button id="themeBtn">☀️ Day/Night</button>
+    <button id="cbBtn">🌈 Vibrant Mode</button>
+    <button id="restartBtn">↻ New Island</button>
   </div>
 </div>
 
+<!-- Tutorial - Welcome to Paradise -->
 <div id="tutorial" class="overlay hidden">
   <div class="panel">
-    <h3>How to Play</h3>
-    <p>Swipe up, down, left or right to combine tiles.</p>
-    <button id="startBtn">Start</button>
+    <h3>🏝️ Welcome to Kanmathi Eternal Paradise</h3>
+    <p>Feel the warm Maldives breeze...<br><br>
+       Combine <strong>1 + 2 → 3</strong><br>
+       Then merge matching corals to grow your reef empire!</p>
+    <p>Swipe or use arrows • Unlimited undos • Eternal beauty 🌊✨</p>
+    <button id="startBtn">Begin Your Journey</button>
   </div>
 </div>
 
+<!-- Game Over - Sunset Celebration -->
 <div id="end" class="overlay hidden">
   <div class="panel">
-    <h2>Game Over</h2>
+    <h2>🌅 Paradise Eternal</h2>
     <h1 id="endScore">0</h1>
-    <button id="playAgainBtn">Play Again</button>
+    <p>Your coral reef has reached legendary status.<br>
+       The ocean remembers your journey forever.</p>
+    <button id="playAgainBtn">Build New Paradise</button>
   </div>
 </div>
 
-<script>
-/* =========================================================
-   ENGINE — v3.0 FINAL
-========================================================= */
-(() => {
-'use strict';
+<!-- Extra luxury touch: Floating particles (pure CSS) -->
+<div class="particles">
+  <div class="particle">🐠</div>
+  <div class="particle">🪸</div>
+  <div class="particle">✨</div>
+  <div class="particle">🌟</div>
+  <div class="particle">🦈</div>
+  <div class="particle">🐚</div>
+  <div class="particle">🌺</div>
+  <div class="particle">🐙</div>
+</div>
 
-/* ---------- ORIENTATION ---------- */
-if (screen.orientation?.lock) {
-  screen.orientation.lock("portrait").catch(()=>{});
+<style>
+/* Floating marine life particles - subtle magic */
+.particles{
+  position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.6;
 }
-
-/* ---------- CONSTANTS ---------- */
-const SIZE = 4;
-const DEAD_ZONE = 24;
-const SWIPE_THRESHOLD = 30;
-
-/* ---------- STATE ---------- */
-let grid = [];
-let score = 0;
-let best = Number(localStorage.getItem("bf_best_v3")) || 0;
-let history = [];
-let over = false;
-
-/* ---------- ELEMENTS ---------- */
-const gridEl = document.getElementById("grid");
-const scoreEl = document.getElementById("score");
-const bestEl = document.getElementById("best");
-const endEl = document.getElementById("end");
-const endScoreEl = document.getElementById("endScore");
-const tutorialEl = document.getElementById("tutorial");
-
-/* ---------- INIT HUD ---------- */
-bestEl.textContent = best;
-
-/* ---------- AUDIO ---------- */
-let soundEnabled = localStorage.getItem("bf_sound_v3") !== "0";
-let audioCtx;
-function beep(freq){
-  if(!soundEnabled) return;
-  if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-  audioCtx.resume();
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  o.frequency.value = freq;
-  g.gain.value = .04;
-  o.connect(g).connect(audioCtx.destination);
-  o.start();
-  o.stop(audioCtx.currentTime + .05);
+.particle{
+  position:absolute;font-size:24px;
+  animation:floatUp linear infinite;
+  opacity:0;
 }
-function haptic(pattern){
-  if(navigator.vibrate) navigator.vibrate(pattern);
+@keyframes floatUp{
+  0%{transform:translateY(100vh) rotate(0deg);opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{transform:translateY(-100px) rotate(360deg);opacity:0}
 }
+.particle:nth-child(1){left:10%;animation-duration:20s;animation-delay:0s}
+.particle:nth-child(2){left:25%;animation-duration:25s;animation-delay:5s}
+.particle:nth-child(3){left:40%;animation-duration:18s;animation-delay:10s}
+.particle:nth-child(4){left:55%;animation-duration:22s;animation-delay:2s}
+.particle:nth-child(5){left:70%;animation-duration:28s;animation-delay:8s}
+.particle:nth-child(6){left:85%;animation-duration:24s;animation-delay:15s}
+.particle:nth-child(7){left:15%;animation-duration:30s;animation-delay:12s}
+.particle:nth-child(8){left:90%;animation-duration:26s;animation-delay:7s}
+</style>
+    <script>
+(()=>{ 'use strict';
 
-/* ---------- GAME ---------- */
-function reset(){
-  grid = Array.from({length:SIZE},()=>Array(SIZE).fill(0));
-  score = 0;
-  history = [];
-  over = false;
-  spawn();
-  spawn();
-  render();
-}
-function spawn(){
+const VERSION="6.0.0-ETERNAL";
+const SIZE=4, MAX_UNDO=200, SWIPE=28;
+
+let grid=[],score=0,best=+localStorage.bf_best_v60||0;
+let history=[],locked=false,over=false;
+
+const G=id=>document.getElementById(id);
+const gridEl=G("grid"),scoreEl=G("score"),bestEl=G("best");
+
+let sound=localStorage.bf_sound_v60!=="0",ctx;
+const beep=(f=800,d=.15,g=.06,vary=0)=>{
+  if(!sound||matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  ctx??=new AudioContext();ctx.resume();
+  const o=ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter();
+  o.type='sine';o.frequency.value=f+vary*Math.random()*100;
+  filter.type='lowpass';filter.frequency.value=2000;
+  gain.gain.value=g;
+  o.connect(filter).connect(gain).connect(ctx.destination);
+  o.start();gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+d);
+  o.stop(ctx.currentTime+d+.02);
+};
+
+const save=()=>localStorage.bf_state_v60=JSON.stringify({grid,score,history});
+const load=()=>{
+  try{
+    const s=JSON.parse(localStorage.bf_state_v60);
+    if(s?.grid){grid=s.grid;score=s.score;history=s.history||[];return true}
+  }catch(e){}
+  return false;
+};
+
+const spawn=()=>{
   const empty=[];
-  grid.forEach((r,y)=>r.forEach((v,x)=>!v&&empty.push({x,y})));
-  if(!empty.length) return;
-  const p = empty[Math.random()*empty.length|0];
-  grid[p.y][p.x] = Math.random()<.5?1:2;
-}
-function move(dx,dy){
-  if(over) return;
+  for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++)if(!grid[y][x])empty.push([x,y]);
+  if(!empty.length) return false;
+  const i=Math.floor(Math.random()*empty.length);
+  const [x,y]=empty[i];
+  grid[y][x]=Math.random()<.7?1:2;
+  return true;
+};
+
+const reset=()=>{
+  grid=Array.from({length:SIZE},()=>Array(SIZE).fill(0));
+  score=0;history=[];over=false;
+  spawn();spawn();render();save();
+};
+
+const move=(dx,dy)=>{
+  if(locked||over) return false;
+  locked=true;
   history.push({g:grid.map(r=>r.slice()),s:score});
-  let moved=false;
-  const order=[0,1,2,3];
+  if(history.length>MAX_UNDO) history.shift();
+
+  let moved=false,order=[0,1,2,3];
   if(dx>0||dy>0) order.reverse();
+
   for(const y of order)for(const x of order){
-    let v=grid[y][x];
-    if(!v) continue;
+    let v=grid[y][x];if(!v)continue;
     let nx=x,ny=y;
     while(true){
       const tx=nx+dx,ty=ny+dy;
@@ -328,134 +510,100 @@ function move(dx,dy){
         nx=tx;ny=ty;moved=true;
       }else if((v===1&&t===2)||(v===2&&t===1)){
         grid[ty][tx]=3;grid[ny][nx]=0;
-        score+=3;beep(600);haptic(15);moved=true;break;
+        score+=3;beep(900,0.18,0.07,200);moved=true;break;
       }else if(v>=3&&v===t){
-        grid[ty][tx]=v*2;grid[ny][nx]=0;
-        score+=v*2;beep(800);haptic([10,20,10]);moved=true;break;
+        const newV=v*2;
+        grid[ty][tx]=newV;grid[ny][nx]=0;
+        score+=newV;beep(1100+Math.log2(newV)*100,0.22,0.08,300);moved=true;break;
       }else break;
     }
   }
-  if(moved){
-    spawn();
-    pulse();
-    render();
-    checkOver();
-  }else{
-    history.pop();
-  }
-}
-function undo(){
-  const p=history.pop();
-  if(!p) return;
-  grid=p.g;
-  score=p.s;
-  render();
-  haptic(5);
-}
-function checkOver(){
+
+  if(moved){spawn();render();save();checkOver()}
+  else history.pop();
+  locked=false;
+  return moved;
+};
+
+const checkOver=()=>{
   for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++){
-    if(!grid[y][x]) return;
-    for(const[dX,dY] of [[1,0],[0,1],[-1,0],[0,-1]]){
+    const a=grid[y][x];
+    if(!a) return false;
+    for(const [dX,dY] of [[1,0],[0,1],[-1,0],[0,-1]]){
       const nx=x+dX,ny=y+dY;
       if(nx>=0&&ny>=0&&nx<SIZE&&ny<SIZE){
-        const a=grid[y][x],b=grid[ny][nx];
-        if(a===b||a+b===3) return;
+        const b=grid[ny][nx];
+        if(a===b||(a===1&&b===2)||(a===2&&b===1)) return false;
       }
     }
   }
   over=true;
-  endScoreEl.textContent=score;
-  endEl.classList.remove("hidden");
-  haptic([40,30,40]);
-}
+  G("endScore").textContent=score;
+  G("end").classList.remove("hidden");
+  return true;
+};
 
-/* ---------- RENDER ---------- */
-function render(){
-  gridEl.innerHTML="";
+const render=()=>{
+  gridEl.replaceChildren();
   scoreEl.textContent=score;
-  if(score>best){
-    best=score;
-    localStorage.setItem("bf_best_v3",best);
-    bestEl.textContent=best;
-  }
-  grid.forEach(r=>r.forEach(v=>{
-    const c=document.createElement("div");
-    c.className="cell";
+  if(score>best){best=score;localStorage.bf_best_v60=best}
+  bestEl.textContent=best;
+
+  grid.forEach((row,y)=>row.forEach((v,x)=>{
+    const cell=document.createElement("div");
+    cell.className="cell";
     if(v){
-      const t=document.createElement("div");
-      t.className="tile";
-      t.dataset.v=v;
-      t.textContent=v;
-      c.appendChild(t);
+      const tile=document.createElement("div");
+      tile.className="tile";
+      tile.dataset.v=v;
+      tile.textContent=v;
+      cell.appendChild(tile);
     }
-    gridEl.appendChild(c);
+    gridEl.appendChild(cell);
   }));
-}
-function pulse(){
-  scoreEl.classList.add("bump");
-  setTimeout(()=>scoreEl.classList.remove("bump"),180);
-}
+};
 
-/* ---------- INPUT ---------- */
 let sx=0,sy=0;
-addEventListener("touchstart",e=>{
-  const t=e.touches[0];
-  if(t.clientX<DEAD_ZONE||t.clientY<DEAD_ZONE||
-     t.clientX>innerWidth-DEAD_ZONE||
-     t.clientY>innerHeight-DEAD_ZONE) return;
-  sx=t.clientX;sy=t.clientY;
-},{passive:false});
-
-addEventListener("touchend",e=>{
-  const t=e.changedTouches[0];
-  const dx=t.clientX-sx;
-  const dy=t.clientY-sy;
-  if(Math.abs(dx)<SWIPE_THRESHOLD&&Math.abs(dy)<SWIPE_THRESHOLD) return;
-  Math.abs(dx)>Math.abs(dy)
-    ? move(dx>0?1:-1,0)
-    : move(0,dy>0?1:-1);
-},{passive:false});
-
+addEventListener("pointerdown",e=>{sx=e.clientX;sy=e.clientY});
+addEventListener("pointerup",e=>{
+  if(over) return;
+  const dx=e.clientX-sx,dy=e.clientY-sy;
+  if(Math.abs(dx)<SWIPE&&Math.abs(dy)<SWIPE) return;
+  Math.abs(dx)>Math.abs(dy)?move(dx>0?1:-1,0):move(0,dy>0?1:-1);
+});
 addEventListener("keydown",e=>{
-  if(e.key==="ArrowLeft")move(-1,0);
-  if(e.key==="ArrowRight")move(1,0);
-  if(e.key==="ArrowUp")move(0,-1);
-  if(e.key==="ArrowDown")move(0,1);
+  if(over) return;
+  const m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
+  if(m) move(m[0],m[1]);
 });
 
-/* ---------- UI ---------- */
-document.getElementById("undoBtn").onclick=undo;
-document.getElementById("restartBtn").onclick=()=>{endEl.classList.add("hidden");reset()};
-document.getElementById("playAgainBtn").onclick=()=>{endEl.classList.add("hidden");reset()};
-document.getElementById("themeBtn").onclick=()=>document.body.classList.toggle("light");
-document.getElementById("cbBtn").onclick=()=>{
-  document.body.classList.toggle("cb");
-  localStorage.setItem("bf_cb_v3",document.body.classList.contains("cb"));
-};
-document.getElementById("startBtn").onclick=()=>{
-  tutorialEl.classList.add("hidden");
-  localStorage.setItem("bf_tutorial_v3","1");
-};
-if(localStorage.getItem("bf_cb_v3")==="true") document.body.classList.add("cb");
-if(!localStorage.getItem("bf_tutorial_v3")) tutorialEl.classList.remove("hidden");
+G("undoBtn").onclick=()=>{const p=history.pop();if(p){grid=p.g;score=p.s;render();save()}};
+G("restartBtn").onclick=()=>{G("end").classList.add("hidden");reset()};
+G("playAgainBtn").onclick=()=>{G("end").classList.add("hidden");reset()};
+G("themeBtn").onclick=()=>document.body.classList.toggle("light");
+G("cbBtn").onclick=()=>document.body.classList.toggle("cb");
+G("startBtn").onclick=()=>{G("tutorial").classList.add("hidden");localStorage.bf_tutorial_v60=1};
 
-/* ---------- START ---------- */
-reset();
+if(!load()) reset();
+render();
+if(!localStorage.bf_tutorial_v60) G("tutorial").classList.remove("hidden");
 
-/* ---------- SERVICE WORKER ---------- */
+/* =============== SERVICE WORKER - OFFLINE ETERNAL PARADISE =============== */
 if("serviceWorker"in navigator){
   const sw=`
+    const CACHE='kanmathi-eternal-v6';
+    const FILES=['./'];
     self.addEventListener('install',e=>{
-      e.waitUntil(caches.open('bf-v3').then(c=>c.addAll(['./'])));
-      self.skipWaiting();
+      e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));
+    });
+    self.addEventListener('activate',e=>{
+      e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));
     });
     self.addEventListener('fetch',e=>{
       e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
     });
   `;
-  navigator.serviceWorker.register(
-    URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))
-  );
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'text/javascript'})));
 }
 
 })();
